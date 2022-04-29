@@ -12,14 +12,49 @@ class ProductenComponent {
   initialiseerHtml() {
     this.categorieenToHtml(this.#productenRepository.geefAlleCategorieen());
     this.productenToHtml(this.#productenRepository.producten);
+    document.getElementById("categorie").onchange = () => {
+      this.productenToHtml(
+        this.#productenRepository.geefProductenUitCategorie(
+          document.getElementById("categorie").value
+        )
+      );
+      document.getElementById("productDetails").style.display = "none";
+    };
   }
 
   // voegt de gegeven categorieen toe aan de selectlist #categorie
-  categorieenToHtml(categorieen) {}
+  categorieenToHtml(categorieen) {
+    categorieen.forEach((categorie) =>
+      document
+        .getElementById("categorie")
+        .insertAdjacentHTML(
+          "beforeend",
+          `<option value="${categorie}">${categorie}</option>`
+        )
+    );
+  }
 
   // toont het aantal producten in div #aantalProducten
   // toont de producten in div #overzichtProducten
-  productenToHtml(producten) {}
+  productenToHtml(producten) {
+    document.getElementById(
+      "aantalProducten"
+    ).innerHTML = `<h4>Aantal producten: ${producten.length} </h4>`;
+    document.getElementById("overzichtProducten").innerHTML = "";
+    producten.forEach((product, index) => {
+      const divElement = document.createElement("div");
+      divElement.id = product.id;
+      if (!(index % 2)) divElement.className = "wit";
+      divElement.onclick = () => {
+        this.productDetailsToHtml(product);
+      };
+      divElement.insertAdjacentHTML(
+        "afterbegin",
+        `<img src=images/${product.id}/thumbs/thumb_${product.afbeeldingen[0]}.jpg alt=${product.titel}><p>${product.titel}</p>`
+      );
+      document.getElementById("overzichtProducten").appendChild(divElement);
+    });
+  }
 
   // toont de details van het gegeven product in de div #productDetails
   // zet het gegeven product vetjes in de div #overzichtProducten
