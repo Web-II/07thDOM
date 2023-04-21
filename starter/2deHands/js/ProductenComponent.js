@@ -5,7 +5,6 @@ export default class ProductenComponent {
   constructor() {
     this.#productenRepository = new ProductenRepository();
     this.#initialiseerHtml();
-    
   }
 
   // deze methode intialiseert de pagina
@@ -14,17 +13,17 @@ export default class ProductenComponent {
     this.#categorieenToHtml(this.#productenRepository.geefAlleCategorieen());
 
     // voeg een event handler toe aan de keuzelijst categorie
-
   }
 
   // voegt de gegeven categorieën toe aan de selectlist #categorie
-  #categorieenToHtml(categorieen) { }
+  #categorieenToHtml(categorieen) {}
 
   // toont het aantal producten in div#aantalProducten
   // en de producten in div#overzichtProducten
-  #productenToHtml(producten) {
+  #productenToHtml(producten) {}
 
-  }
+  // zet in het productoverzicht, het gekozen product vetjes
+  #zetProductVetjes(divElement) {}
 
   // toont de details van het gegeven product in de div #productDetails
   #productDetailsToHtml(product) {
